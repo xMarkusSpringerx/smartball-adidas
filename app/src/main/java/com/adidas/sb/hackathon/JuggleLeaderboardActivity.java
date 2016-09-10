@@ -1,10 +1,14 @@
 package com.adidas.sb.hackathon;
 
 import android.Manifest;
+
+import android.os.StrictMode;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Movie;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,15 +22,25 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.adidas.sensors.api.Sensor;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class JuggleLeaderboardActivity extends AppCompatActivity {
@@ -97,16 +111,43 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
     private List<ItemObject> getAllItemList() {
 
         List<ItemObject> allItems = new ArrayList<ItemObject>();
-        allItems.add(new ItemObject("Lionel Messi", "55", R.drawable.leo));
-        allItems.add(new ItemObject("Lukas", "51", R.drawable.lukas));
-        allItems.add(new ItemObject("Markus", "21", R.drawable.markus));
-        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.face));
-        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.face));
-        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.face));
-        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.face));
-        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.face));
-        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.face));
-        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.face));
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        String sURL = "http://10.25.28.202:1337/highscores"; //just a string
+
+        try {
+            // Connect to the URL using java's native library
+            URL url = new URL(sURL);
+            HttpURLConnection request = (HttpURLConnection) url.openConnection();
+            request.setRequestProperty( "Content-Type", "application/json" );
+            request.setRequestProperty("Accept", "application/json");
+
+            request.connect();
+            // Convert to a JSON object to print data
+            JsonParser jp = new JsonParser(); //from gson
+
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+
+            JsonArray t = root.getAsJsonArray();
+
+            for(int i  = 0; i < t.size(); i++) {
+                JsonElement e = t.get(i);
+                JsonObject o = e.getAsJsonObject();
+                String name = o.get("name").toString();
+                String score = o.get("score").toString();
+
+                allItems.add(new ItemObject(name, score, R.drawable.face));
+            }
+
+            return allItems;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return allItems;
     }

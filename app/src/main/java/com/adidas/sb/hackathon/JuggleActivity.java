@@ -2,14 +2,17 @@ package com.adidas.sb.hackathon;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import com.adidas.sensors.api.ConnectivityService;
 import com.adidas.sensors.api.Sensor;
@@ -32,8 +35,8 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
     private DataDownloader downloader;
     private ConnectivityService connectivityService;
     private TextView txtConnectionStatus;
-    public int juggles;
-
+    private int juggles;
+    private EditText txtPlayerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
         chbReadyToKick = (CheckBox) findViewById(R.id.chbox_readyToKick);
         txtJuggleCount = (TextView) findViewById(R.id.txt_juggle_count);
         txtConnectionStatus = (TextView) findViewById(R.id.tv_connectivity_status);
+        txtPlayerName = (EditText) findViewById(R.id.player_name_provided);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -182,11 +186,19 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
     private void stopJuggle() {
         //send player_name + juggles to server3
+        String playerName = txtPlayerName.getText().toString();
+        String jugglesTxt =  txtJuggleCount.getText().toString();
+
+        if (playerName.equals("")) {
+            playerName = "Unknown player";
+        }
+
+
         //go back to leadership activity
 
-        chbReadyToKick.setChecked(false);
-        chbReadyToKick.setEnabled(false);
-        softResetBall(ResetReason.CLOSING_ACTIVITY);
+
+
+        //finish();
     }
 
     //SmartBall operations

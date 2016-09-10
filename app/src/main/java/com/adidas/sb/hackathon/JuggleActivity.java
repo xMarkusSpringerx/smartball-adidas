@@ -24,6 +24,26 @@ import com.adidas.sensors.api.smartball.DataDownloader;
 import com.adidas.sensors.api.smartball.KickListener;
 import com.adidas.sensors.api.smartball.SmartBallService;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
     private static final String TAG = "JuggleActivity";
@@ -193,12 +213,39 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
             playerName = "Unknown player";
         }
 
+        HttpClient httpClient = new DefaultHttpClient();
+        // replace with your url
+        HttpPost httpPost = new HttpPost("http://10.25.28.202:3000/highscores");
 
-        //go back to leadership activity
+
+        //Post Data
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+        nameValuePair.add(new BasicNameValuePair("name", playerName));
+        nameValuePair.add(new BasicNameValuePair("score", jugglesTxt));
 
 
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
+            // log exception
+            e.printStackTrace();
+        }
 
-        //finish();
+        //making POST request.
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            // write response to log
+            Log.d("Http Post Response:", response.toString());
+        } catch (ClientProtocolException e) {
+            // Log exception
+            e.printStackTrace();
+        } catch (IOException e) {
+            // Log exception
+            e.printStackTrace();
+        }
+
+        finish();
     }
 
     //SmartBall operations
@@ -239,14 +286,6 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
         txtJuggleCount.setText(dribblingString);
 
-        /*chbKickDetected.setEnabled(true);
-
-        if (chbKickDetected.isChecked()) {
-            chbKickDetected.setChecked(false);
-        } else {
-            chbKickDetected.setChecked(true);
-        }
-        */
         softResetBall(ResetReason.PREPARE_KICK);
     }
 }

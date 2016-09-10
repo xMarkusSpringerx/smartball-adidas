@@ -169,6 +169,7 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
         chbKickDetected.setEnabled(false);
         chbReadyToKick.setChecked(false);
         chbReadyToKick.setEnabled(false);
+        juggles = 0;
         txtJuggleCount.setText("0");
     }
 
@@ -179,6 +180,15 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
     public void clickStartJuggling(View view) {
         startJuggle();
+    }
+
+    public void clickStopJuggling(View view) {
+        stopJuggle();
+    }
+
+    private void stopJuggle() {
+        //store player_name + juggles
+        //go back to leadership activity
     }
 
     //SmartBall operations

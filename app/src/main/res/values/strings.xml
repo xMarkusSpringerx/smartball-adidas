@@ -29,6 +29,7 @@
     <string name="charging_stopped">Charging stopped</string>
     <string name="position_the_ball">Position the ball</string>
     <string name="start_juggling">Start Juggling</string>
+    <string name="stop_juggling">Stop Juggling</string>
     <string name="ready_to_kick">Ready to kick</string>
     <string name="kick_detected">Kick detected</string>
     <string name="download_data">Download data</string>

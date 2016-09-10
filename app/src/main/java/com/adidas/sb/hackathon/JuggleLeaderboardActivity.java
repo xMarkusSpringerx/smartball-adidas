@@ -32,7 +32,6 @@ import java.util.List;
 public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     private ListView theListView;
-    private ArrayList<LeaderboardEntry> allScores;
     private Button btnRecordJuggle;
     private Sensor sensor;
     private LinearLayoutManager lLayout;
@@ -64,7 +63,6 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(JuggleLeaderboardActivity.this, rowListItem);
         rView.setAdapter(rcAdapter);
 
-        allScores = new ArrayList<LeaderboardEntry>();
         theListView = (ListView) findViewById(R.id.leaderboard_listview);
         btnRecordJuggle = (Button) findViewById(R.id.btn_record_juggle);
 

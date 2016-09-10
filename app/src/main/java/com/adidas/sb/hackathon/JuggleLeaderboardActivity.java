@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,6 +49,8 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
     private ListView theListView;
     private Sensor sensor;
     private LinearLayoutManager lLayout;
+    SwipeRefreshLayout mRefreshLayout;
+    RecyclerViewAdapter rcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,16 +72,33 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         List<ItemObject> rowListItem = getAllItemList();
 
         lLayout = new LinearLayoutManager(JuggleLeaderboardActivity.this);
+        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updateData();
+                mRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRefreshLayout.setRefreshing(false);
+                    }
+                }, 500);
+            }
+        });
 
         RecyclerView rView = (RecyclerView)findViewById(R.id.recycler_view);
         rView.setLayoutManager(lLayout);
 
-        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(JuggleLeaderboardActivity.this, rowListItem);
+        rcAdapter = new RecyclerViewAdapter(JuggleLeaderboardActivity.this, rowListItem);
         rView.setAdapter(rcAdapter);
 
-        theListView = (ListView) findViewById(R.id.leaderboard_listview);
-
     }
+
+    private void updateData() {
+        rcAdapter.setItems(getAllItemList());
+        rcAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -104,14 +124,14 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     private List<ItemObject> getAllItemList() {
 
-        List<ItemObject> allItems = new ArrayList<ItemObject>();
+        List<ItemObject> allItems = new ArrayList<>();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        String sURL = "http://10.25.28.202:1337/highscores"; //just a string
+        String sURL = "http://10.25.28.202:3000/highscores"; //just a string
 
         try {
             // Connect to the URL using java's native library
@@ -164,8 +184,12 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
+        updateData();
+
+
         super.onResume();
-        //start scanning when the activity is in foreground
+
     }
 
     @Override

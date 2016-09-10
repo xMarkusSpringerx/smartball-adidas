@@ -38,4 +38,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public int getItemCount() {
         return this.itemList.size();
     }
+
+    public void setItems(List<ItemObject> items) {
+        itemList = items;
+    }
 }

@@ -67,6 +67,16 @@
             android:gravity="center"
             android:textSize="150dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stop_juggling"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:id="@+id/btn_stop_juggling"
+            android:onClick="clickStopJuggling"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

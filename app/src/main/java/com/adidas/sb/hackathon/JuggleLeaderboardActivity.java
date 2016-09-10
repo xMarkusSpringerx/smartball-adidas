@@ -46,7 +46,6 @@ import java.util.Map;
 public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     private ListView theListView;
-    private Button btnRecordJuggle;
     private Sensor sensor;
     private LinearLayoutManager lLayout;
 
@@ -78,7 +77,6 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         rView.setAdapter(rcAdapter);
 
         theListView = (ListView) findViewById(R.id.leaderboard_listview);
-        btnRecordJuggle = (Button) findViewById(R.id.btn_record_juggle);
 
     }
 
@@ -104,10 +102,9 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         return true;
     }
 
-
-
     private List<ItemObject> getAllItemList() {
 
+<<<<<<< 5b55f42c7d439df48a723d98c8015bc858a73ac7
         List<ItemObject> allItems = new ArrayList<ItemObject>();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -146,6 +143,19 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+=======
+        List<ItemObject> allItems = new ArrayList<>();
+        allItems.add(new ItemObject("Lionel Messi", "55", R.drawable.leo));
+        allItems.add(new ItemObject("Lukas", "51", R.drawable.lukas));
+        allItems.add(new ItemObject("Markus", "21", R.drawable.markus));
+        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.face));
+        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.face));
+        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.face));
+        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.face));
+        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.face));
+        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.face));
+        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.face));
+>>>>>>> remove checkbox kickdetected as it is obsolete
 
         return allItems;
     }

@@ -204,7 +204,7 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
                 //nothing to do, let's wait to the kick
                 Log.i(TAG, "Start logging succesful, waiting for kick");
             }
-
+            
             @Override
             public void commandFailed() {
                 onError();

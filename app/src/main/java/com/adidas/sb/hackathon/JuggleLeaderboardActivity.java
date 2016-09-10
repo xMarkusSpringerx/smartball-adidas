@@ -104,7 +104,6 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     private List<ItemObject> getAllItemList() {
 
-<<<<<<< 5b55f42c7d439df48a723d98c8015bc858a73ac7
         List<ItemObject> allItems = new ArrayList<ItemObject>();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -132,40 +131,27 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
             for(int i  = 0; i < t.size(); i++) {
                 JsonElement e = t.get(i);
                 JsonObject o = e.getAsJsonObject();
-                String name = o.get("name").toString();
-                String score = o.get("score").toString();
+                String name = o.get("name").getAsString();
+                String score = o.get("score").getAsString();
 
-                allItems.add(new ItemObject(name, score, R.drawable.face));
+                if (name.equals("Markus")) {
+                    allItems.add(new ItemObject(name, score, R.drawable.markus));
+                }
+                else if (name.equals("Lukas")) {
+                    allItems.add(new ItemObject(name, score, R.drawable.lukas));
+                }
+                else if (name.equals("Messi")) {
+                    allItems.add(new ItemObject(name, score, R.drawable.leo));
+                }
+                else {
+                    allItems.add(new ItemObject(name, score, R.drawable.unknown));
+                }
+
             }
-
-            return allItems;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-=======
-        List<ItemObject> allItems = new ArrayList<>();
-        allItems.add(new ItemObject("Lionel Messi", "55", R.drawable.leo));
-        allItems.add(new ItemObject("Lukas", "51", R.drawable.lukas));
-        allItems.add(new ItemObject("Markus", "21", R.drawable.markus));
-<<<<<<< 6e3f112bcfae218529deafe71f7b5e3575dc2515
-        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.face));
-        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.face));
-        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.face));
-        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.face));
-        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.face));
-        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.face));
-        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.face));
->>>>>>> remove checkbox kickdetected as it is obsolete
-=======
-        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.unknown));
-        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.unknown));
-        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.unknown));
-        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.unknown));
-        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.unknown));
-        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.unknown));
-        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.unknown));
->>>>>>> add unknown user avatars to example data
 
         return allItems;
     }

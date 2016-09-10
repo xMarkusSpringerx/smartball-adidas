@@ -1,0 +1,5 @@
+com.adidas.sensors.api
+com.adidas.sensors.api.btle
+com.adidas.sensors.api.mock
+com.adidas.sensors.api.smartball
+com.adidas.sensors.mock.server

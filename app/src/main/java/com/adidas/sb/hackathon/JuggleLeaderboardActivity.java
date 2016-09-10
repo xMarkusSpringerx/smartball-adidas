@@ -148,6 +148,7 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         allItems.add(new ItemObject("Lionel Messi", "55", R.drawable.leo));
         allItems.add(new ItemObject("Lukas", "51", R.drawable.lukas));
         allItems.add(new ItemObject("Markus", "21", R.drawable.markus));
+<<<<<<< 6e3f112bcfae218529deafe71f7b5e3575dc2515
         allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.face));
         allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.face));
         allItems.add(new ItemObject("Gary Cook", "15", R.drawable.face));
@@ -156,6 +157,15 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.face));
         allItems.add(new ItemObject("Grace Praise", "1", R.drawable.face));
 >>>>>>> remove checkbox kickdetected as it is obsolete
+=======
+        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.unknown));
+        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.unknown));
+        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.unknown));
+        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.unknown));
+        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.unknown));
+        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.unknown));
+        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.unknown));
+>>>>>>> add unknown user avatars to example data
 
         return allItems;
     }

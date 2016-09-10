@@ -46,8 +46,6 @@ import java.util.Map;
 public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     private ListView theListView;
-    private ArrayList<LeaderboardEntry> allScores;
-    private Button btnRecordJuggle;
     private Sensor sensor;
     private LinearLayoutManager lLayout;
 
@@ -78,9 +76,7 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(JuggleLeaderboardActivity.this, rowListItem);
         rView.setAdapter(rcAdapter);
 
-        allScores = new ArrayList<LeaderboardEntry>();
         theListView = (ListView) findViewById(R.id.leaderboard_listview);
-        btnRecordJuggle = (Button) findViewById(R.id.btn_record_juggle);
 
     }
 
@@ -105,8 +101,6 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
     */
         return true;
     }
-
-
 
     private List<ItemObject> getAllItemList() {
 
@@ -137,13 +131,23 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
             for(int i  = 0; i < t.size(); i++) {
                 JsonElement e = t.get(i);
                 JsonObject o = e.getAsJsonObject();
-                String name = o.get("name").toString();
-                String score = o.get("score").toString();
+                String name = o.get("name").getAsString();
+                String score = o.get("score").getAsString();
 
-                allItems.add(new ItemObject(name, score, R.drawable.face));
+                if (name.equals("Markus")) {
+                    allItems.add(new ItemObject(name, score, R.drawable.markus));
+                }
+                else if (name.equals("Lukas")) {
+                    allItems.add(new ItemObject(name, score, R.drawable.lukas));
+                }
+                else if (name.equals("Messi")) {
+                    allItems.add(new ItemObject(name, score, R.drawable.leo));
+                }
+                else {
+                    allItems.add(new ItemObject(name, score, R.drawable.unknown));
+                }
+
             }
-
-            return allItems;
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -28,7 +28,6 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
     private SmartBallService smartBallService;
 
     private CheckBox chbReadyToKick;
-    private CheckBox chbKickDetected;
     private TextView txtJuggleCount;
     private DataDownloader downloader;
     private ConnectivityService connectivityService;
@@ -44,7 +43,6 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
         setContentView(R.layout.activity_juggle);
 
         chbReadyToKick = (CheckBox) findViewById(R.id.chbox_readyToKick);
-        chbKickDetected = (CheckBox) findViewById(R.id.chbox_kickDetected);
         txtJuggleCount = (TextView) findViewById(R.id.txt_juggle_count);
         txtConnectionStatus = (TextView) findViewById(R.id.tv_connectivity_status);
 
@@ -86,9 +84,7 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
     private void onReconnect() {
         txtConnectionStatus.setText(R.string.connected);
-        if (chbKickDetected.isChecked()) {
-            softResetBall(ResetReason.RECONNECTING);
-        }
+        softResetBall(ResetReason.RECONNECTING);
     }
 
     private void onDisconnect() {
@@ -165,10 +161,9 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
     }
 
     private void resetActivityState() {
-        chbKickDetected.setChecked(false);
-        chbKickDetected.setEnabled(false);
         chbReadyToKick.setChecked(false);
         chbReadyToKick.setEnabled(false);
+        juggles = 0;
         txtJuggleCount.setText("0");
     }
 
@@ -179,6 +174,19 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
     public void clickStartJuggling(View view) {
         startJuggle();
+    }
+
+    public void clickStopJuggling(View view) {
+        stopJuggle();
+    }
+
+    private void stopJuggle() {
+        //send player_name + juggles to server3
+        //go back to leadership activity
+
+        chbReadyToKick.setChecked(false);
+        chbReadyToKick.setEnabled(false);
+        softResetBall(ResetReason.CLOSING_ACTIVITY);
     }
 
     //SmartBall operations
@@ -196,7 +204,7 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
                 //nothing to do, let's wait to the kick
                 Log.i(TAG, "Start logging succesful, waiting for kick");
             }
-
+            
             @Override
             public void commandFailed() {
                 onError();
@@ -219,14 +227,14 @@ public class JuggleActivity extends AppCompatActivity implements  KickListener {
 
         txtJuggleCount.setText(dribblingString);
 
-        chbKickDetected.setEnabled(true);
+        /*chbKickDetected.setEnabled(true);
 
         if (chbKickDetected.isChecked()) {
             chbKickDetected.setChecked(false);
         } else {
             chbKickDetected.setChecked(true);
         }
-
+        */
         softResetBall(ResetReason.PREPARE_KICK);
     }
 }

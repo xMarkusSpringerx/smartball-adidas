@@ -46,15 +46,6 @@
             android:enabled="false"
             android:id="@+id/chbox_readyToKick"/>
 
-        <CheckBox
-            style="@style/CustomCheckboxStyle"
-            android:layout_width="wrap_content"
-            android:text="@string/kick_detected"
-            android:clickable="false"
-            android:checked="false"
-            android:enabled="false"
-            android:id="@+id/chbox_kickDetected"/>
-
         <TextView
             style="@style/CustomCheckboxStyle"
             android:layout_width="wrap_content"
@@ -65,7 +56,17 @@
             android:layout_marginBottom="2dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="150dp" />
+            android:textSize="150sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stop_juggling"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:id="@+id/btn_stop_juggling"
+            android:onClick="clickStopJuggling"
+            />
 
         <TextView
             android:layout_width="wrap_content"

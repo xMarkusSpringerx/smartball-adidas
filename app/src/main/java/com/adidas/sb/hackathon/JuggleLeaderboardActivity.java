@@ -32,7 +32,6 @@ import java.util.List;
 public class JuggleLeaderboardActivity extends AppCompatActivity {
 
     private ListView theListView;
-    private Button btnRecordJuggle;
     private Sensor sensor;
     private LinearLayoutManager lLayout;
 
@@ -64,7 +63,6 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         rView.setAdapter(rcAdapter);
 
         theListView = (ListView) findViewById(R.id.leaderboard_listview);
-        btnRecordJuggle = (Button) findViewById(R.id.btn_record_juggle);
 
     }
 
@@ -90,11 +88,9 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         return true;
     }
 
-
-
     private List<ItemObject> getAllItemList() {
 
-        List<ItemObject> allItems = new ArrayList<ItemObject>();
+        List<ItemObject> allItems = new ArrayList<>();
         allItems.add(new ItemObject("Lionel Messi", "55", R.drawable.leo));
         allItems.add(new ItemObject("Lukas", "51", R.drawable.lukas));
         allItems.add(new ItemObject("Markus", "21", R.drawable.markus));

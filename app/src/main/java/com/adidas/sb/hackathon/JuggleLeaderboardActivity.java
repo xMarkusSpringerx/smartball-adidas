@@ -94,13 +94,13 @@ public class JuggleLeaderboardActivity extends AppCompatActivity {
         allItems.add(new ItemObject("Lionel Messi", "55", R.drawable.leo));
         allItems.add(new ItemObject("Lukas", "51", R.drawable.lukas));
         allItems.add(new ItemObject("Markus", "21", R.drawable.markus));
-        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.face));
-        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.face));
-        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.face));
-        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.face));
-        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.face));
-        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.face));
-        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.face));
+        allItems.add(new ItemObject("Chidi Johnson", "20", R.drawable.unknown));
+        allItems.add(new ItemObject("DeGordio Puritio", "17", R.drawable.unknown));
+        allItems.add(new ItemObject("Gary Cook", "15", R.drawable.unknown));
+        allItems.add(new ItemObject("Edith Helen", "12", R.drawable.unknown));
+        allItems.add(new ItemObject("Kingston Dude", "10", R.drawable.unknown));
+        allItems.add(new ItemObject("Edwin Bent", "8", R.drawable.unknown));
+        allItems.add(new ItemObject("Grace Praise", "1", R.drawable.unknown));
 
         return allItems;
     }
